@@ -26,19 +26,24 @@ void read_string_from_user(char chars[],int* count_ptr){
   *count_ptr = count;
 }
 
-// Todo: change count to ARRAY_COUNT
+int comp(const void* a, const void* b){
+  return *(int*)a - *(int*)b;
+}
 
 int main(int argc, char *argv[])
 {
   char chars[ARRAY_COUNT];
   int inputed_numbers[ARRAY_COUNT];
   int count_of_numbers = 0;
-  int i;
+  int i,n;
 
   for (i = 0; i < ARRAY_COUNT; i++) {
     read_string_from_user(chars,&count_of_numbers);
     inputed_numbers[i] = give_back_integer(chars,count_of_numbers);
   }
+  n = sizeof(inputed_numbers)/sizeof(inputed_numbers[0]);
+  qsort(inputed_numbers, n,sizeof(int), comp);
+
   printf("inputed numbers in order:\n");
 
   for (i=0;i<ARRAY_COUNT;i++) {
